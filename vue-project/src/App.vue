@@ -12,7 +12,11 @@ const newTodo = ref('new todo');
 
 function addTodo(e) {
   e.preventDefault();
-  alert(newTodo);
+  alert(newTodo.value);
+}
+
+function handleInput(e) {
+  newTodo.value = e.target.value
 }
 </script>
 
@@ -23,10 +27,9 @@ function addTodo(e) {
       <li v-for="todo in todos">{{ todo }}</li>
     </ul>
     <form @submit="addTodo">
-      <input type="text" :value="newTodo">
+      <input type="text" :value="newTodo" @input="handleInput">
       <button>Add</button>
     </form>
-
   </div>
 </template>
 

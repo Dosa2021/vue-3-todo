@@ -1,16 +1,8 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
+import TodoList from './components/TodoList.vue';
+import TodoAddForm from './components/TodoAddForm.vue';
 
-// const todos = [
-//   'Buy Milk',
-//   'Go to Gym',
-//   'Study JavaScript'
-// ]
-// const todos = reactive([
-//   'Buy Milk',
-//   'Go to Gym',
-//   'Study JavaScript'
-// ]);
 const todos = reactive([
   {
     id: crypto.randomUUID(),
@@ -26,53 +18,38 @@ const todos = reactive([
   },
 ]);
 
-// const newTodo = 'new todo';
-const newTodo = ref('');
-
-function addTodo(e) {
-  if (newTodo.value.trim() === '') {
-    return;
-  }
-
-  e.preventDefault();
-  // alert(newTodo.value);
+function addTodo(newTodo) {
   todos.push({
     id: crypto.randomUUID(),
-    title: newTodo.value
+    title: newTodo
   })
-  newTodo.value = '';
 }
 
-function handleInput(e) {
-  newTodo.value = e.target.value
-}
 </script>
 
 <template>
   <div class="container">
     <h1>Todos</h1>
-    <ul>
-      <li v-for="todo in todos">{{ todo.title }}</li>
-    </ul>
-    <form @submit="addTodo">
-      <!-- <input type="text" :value="newTodo" @input="handleInput"> -->
-
-       <!-- Note: v-model -->
-      <input type="text" v-model="newTodo">
-      <button>Add</button>
-    </form>
+    <TodoList :todos="todos"/>
+    <TodoAddForm @addTodoEvent="addTodo"/>
   </div>
+  <img src="/mei_1.jpg" alt="">
 </template>
 
 <style scoped>
 .container {
-  width: 400px;
   margin: 0 auto;
+  padding-bottom: 10px;
+  width: 500px;
 }
 
 h1 {
   font-size: 20px;
   border-bottom: 1px solid;
   padding: 8px;
+}
+
+img {
+  width: 100%;
 }
 </style>

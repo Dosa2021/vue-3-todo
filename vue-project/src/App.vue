@@ -27,7 +27,8 @@ function handleInput(e) {
       <li v-for="todo in todos">{{ todo }}</li>
     </ul>
     <form @submit="addTodo">
-      <input type="text" :value="newTodo" @input="handleInput">
+      <!-- <input type="text" :value="newTodo" @input="handleInput"> -->
+      <input type="text" v-model="newTodo">
       <button>Add</button>
     </form>
   </div>

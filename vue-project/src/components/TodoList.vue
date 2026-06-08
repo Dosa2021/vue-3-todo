@@ -1,4 +1,5 @@
 <script setup>
+// TODO: どうやってデバッグするの？
 const props = defineProps({
     todos: Array,
  });

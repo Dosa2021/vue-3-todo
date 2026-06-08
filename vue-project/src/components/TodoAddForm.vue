@@ -5,7 +5,9 @@ const emit = defineEmits(['addTodoEvent']);
 const newTodo = ref('');
 
 function handleSubmit() {
-    emit('addTodoEvent', newTodo.value)
+    if (newTodo.value.trim() === '') return;
+    emit('addTodoEvent', newTodo.value);
+    newTodo.value = '';
 }
 </script>
 

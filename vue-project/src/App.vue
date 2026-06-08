@@ -19,8 +19,10 @@ const todos = reactive([
 ]);
 
 function addTodo(newTodo) {
-  console.log('addtodo')
-  console.log(newTodo)
+  todos.push({
+    id: crypto.randomUUID(),
+    title: newTodo
+  })
 }
 
 </script>
@@ -28,11 +30,8 @@ function addTodo(newTodo) {
 <template>
   <div class="container">
     <h1>Todos</h1>
-
     <TodoList :todos="todos"/>
-
     <TodoAddForm @addTodoEvent="addTodo"/>
-
   </div>
   <img src="/mei_1.jpg" alt="">
 </template>

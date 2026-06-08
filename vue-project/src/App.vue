@@ -1,18 +1,24 @@
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 
-const todos = [
+// const todos = [
+//   'Buy Milk',
+//   'Go to Gym',
+//   'Study JavaScript'
+// ]
+const todos = reactive([
   'Buy Milk',
   'Go to Gym',
   'Study JavaScript'
-]
+]);
 
 // const newTodo = 'new todo';
 const newTodo = ref('new todo');
 
 function addTodo(e) {
   e.preventDefault();
-  alert(newTodo.value);
+  // alert(newTodo.value);
+  todos.push(newTodo.value)
 }
 
 function handleInput(e) {
@@ -28,6 +34,8 @@ function handleInput(e) {
     </ul>
     <form @submit="addTodo">
       <!-- <input type="text" :value="newTodo" @input="handleInput"> -->
+
+       <!-- Note: v-model -->
       <input type="text" v-model="newTodo">
       <button>Add</button>
     </form>

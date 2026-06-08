@@ -1,47 +1,78 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { reactive, ref } from 'vue';
+
+// const todos = [
+//   'Buy Milk',
+//   'Go to Gym',
+//   'Study JavaScript'
+// ]
+// const todos = reactive([
+//   'Buy Milk',
+//   'Go to Gym',
+//   'Study JavaScript'
+// ]);
+const todos = reactive([
+  {
+    id: crypto.randomUUID(),
+    title: 'Item 0'
+  },
+  {
+    id: crypto.randomUUID(),
+    title: 'Item 1'
+  },
+  {
+    id: crypto.randomUUID(),
+    title: 'Item 2'
+  },
+]);
+
+// const newTodo = 'new todo';
+const newTodo = ref('');
+
+function addTodo(e) {
+  if (newTodo.value.trim() === '') {
+    return;
+  }
+
+  e.preventDefault();
+  // alert(newTodo.value);
+  todos.push({
+    id: crypto.randomUUID(),
+    title: newTodo.value
+  })
+  newTodo.value = '';
+}
+
+function handleInput(e) {
+  newTodo.value = e.target.value
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div class="container">
+    <h1>Todos</h1>
+    <ul>
+      <li v-for="todo in todos">{{ todo.title }}</li>
+    </ul>
+    <form @submit="addTodo">
+      <!-- <input type="text" :value="newTodo" @input="handleInput"> -->
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+       <!-- Note: v-model -->
+      <input type="text" v-model="newTodo">
+      <button>Add</button>
+    </form>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.container {
+  width: 400px;
+  margin: 0 auto;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+h1 {
+  font-size: 20px;
+  border-bottom: 1px solid;
+  padding: 8px;
 }
 </style>

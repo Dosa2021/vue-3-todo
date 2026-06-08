@@ -1,47 +1,44 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue';
+
+const todos = [
+  'Buy Milk',
+  'Go to Gym',
+  'Study JavaScript'
+]
+
+// const newTodo = 'new todo';
+const newTodo = ref('new todo');
+
+function addTodo(e) {
+  e.preventDefault();
+  alert(newTodo);
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div class="container">
+    <h1>Todos</h1>
+    <ul>
+      <li v-for="todo in todos">{{ todo }}</li>
+    </ul>
+    <form @submit="addTodo">
+      <input type="text" :value="newTodo">
+      <button>Add</button>
+    </form>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.container {
+  width: 400px;
+  margin: 0 auto;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+h1 {
+  font-size: 20px;
+  border-bottom: 1px solid;
+  padding: 8px;
 }
 </style>

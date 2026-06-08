@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue';
+import TodoList from './components/TodoList.vue';
 
 // const todos = [
 //   'Buy Milk',
@@ -51,9 +52,9 @@ function handleInput(e) {
 <template>
   <div class="container">
     <h1>Todos</h1>
-    <ul>
-      <li v-for="todo in todos">{{ todo.title }}</li>
-    </ul>
+
+    <TodoList :todos="todos"/>
+
     <form @submit="addTodo">
       <!-- <input type="text" :value="newTodo" @input="handleInput"> -->
 
@@ -62,17 +63,23 @@ function handleInput(e) {
       <button>Add</button>
     </form>
   </div>
+  <img src="/mei_1.jpg" alt="">
 </template>
 
 <style scoped>
 .container {
-  width: 400px;
   margin: 0 auto;
+  padding-bottom: 10px;
+  width: 500px;
 }
 
 h1 {
   font-size: 20px;
   border-bottom: 1px solid;
   padding: 8px;
+}
+
+img {
+  width: 100%;
 }
 </style>

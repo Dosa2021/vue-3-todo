@@ -6,31 +6,41 @@ import TodoAddForm from './components/TodoAddForm.vue';
 const todos = reactive([
   {
     id: crypto.randomUUID(),
-    title: 'Item 0'
+    title: 'Item 0',
+    isCompleted: false
   },
   {
     id: crypto.randomUUID(),
-    title: 'Item 1'
+    title: 'Item 1',
+    isCompleted: true
   },
   {
     id: crypto.randomUUID(),
-    title: 'Item 2'
+    title: 'Item 2',
+    isCompleted: false
   },
 ]);
 
 function addTodo(newTodo) {
   todos.push({
     id: crypto.randomUUID(),
-    title: newTodo
+    title: newTodo,
+    isCompleted: false
   })
 }
 
+function toggleIsCompleted(todo) {
+  const index = todos.findIndex((element) => {
+    return element.id === todo.id
+  })
+  todos[index].isCompleted = !todos[index].isCompleted;
+}
 </script>
 
 <template>
   <div class="container">
     <h1>Todos</h1>
-    <TodoList :todos="todos"/>
+    <TodoList :todos="todos" @checkTodoEvent="toggleIsCompleted" />
     <TodoAddForm @addTodoEvent="addTodo"/>
   </div>
   <img src="/mei_1.jpg" alt="">
